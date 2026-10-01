@@ -1,6 +1,6 @@
 'use strict';
 // Endereço centralizado para a futura discussão arquivada.
-const BBS_URL = '#arquivo-status';
+const BBS_URL = 'https://nocturnabbs.vercel.app';
 const INSTAGRAM_URL = '#instagram-status';
 const films = [
   {title:'A Última Estação',year:2003,genre:'Drama',director:'Cláudia Amaral',poster:'ultima-estacao',note:'Despedidas numa pequena estação do interior.'},
@@ -25,6 +25,7 @@ if(archived){archived.href=BBS_URL;archived.addEventListener('click',event=>{if(
 const instagram=document.getElementById('rafael-instagram');
 if(instagram){instagram.href=INSTAGRAM_URL;instagram.addEventListener('click',event=>{if(INSTAGRAM_URL.startsWith('#')){event.preventDefault();const status=document.querySelector(INSTAGRAM_URL);if(status){status.hidden=false;}}});}
 for(const link of document.querySelectorAll('[data-unavailable]')){link.addEventListener('click',event=>{event.preventDefault();const status=document.getElementById('menu-status');status.textContent='Esta seção está temporariamente indisponível.';status.hidden=false;});}
+
 
 
 

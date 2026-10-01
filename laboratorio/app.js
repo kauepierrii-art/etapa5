@@ -3,7 +3,7 @@
 const NEGATIVO_CODIGO = 'FOB-94-0918-07';
 // Substitua null pela URL real do CineArquivo quando estiver disponível.
 // Enquanto isso, o link permanece nesta página e informa a indisponibilidade.
-const CINEARQUIVO_URL = null;
+const CINEARQUIVO_URL = 'https://cinearquivo.vercel.app';
 const resultado = document.getElementById('resultado');
 const mensagem = document.getElementById('mensagem');
 document.getElementById('consulta').addEventListener('submit', (event) => {
@@ -129,3 +129,4 @@ window.addEventListener('resize', () => {
   if (ampliacao.open) ajustarFoto();
 });
 // O dialog mantém ESC e a devolução de foco à miniatura.
+
