@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foto Óptica Brasil — Arquivo fotográfico</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="site" id="inicio">
+<header><div class="marca"><span class="objetiva" aria-hidden="true"></span><div><strong>FOTO ÓPTICA <span>BRASIL</span></strong><p>Imagem, revelação e memória desde 1978</p></div></div><div class="atendimento">ATENDIMENTO<br><b>Segunda a sexta</b><br>das 9h às 18h</div></header>
+<nav aria-label="Menu principal"><a href="#inicio">INÍCIO</a><a href="#servicos">SERVIÇOS</a><a href="#arquivo">ARQUIVO</a><a href="#lojas">LOJAS</a><a href="#contato">FALE CONOSCO</a></nav>
+<div class="faixa">Bem-vindo à Foto Óptica Brasil. <span>Tradição e qualidade em cada fotografia.</span></div>
+<div class="colunas">
+<aside class="servicos" id="servicos"><h2>SERVIÇOS</h2><ul><li><a href="#servicos">Revelação fotográfica</a></li><li><a href="#servicos">Ampliações</a></li><li><a href="#servicos">Digitalização</a></li><li><a href="#servicos">Restauração</a></li><li><a href="#servicos">Cópias e reproduções</a></li><li><a href="#arquivo">Arquivo fotográfico</a></li></ul><div class="aviso"><b>Suas lembranças<br>merecem cuidado.</b><p>Conservação e reprodução de fotografias em papel e negativos.</p></div><h2 id="lojas">NOSSAS LOJAS</h2><p class="texto-lateral">Procure o balcão de atendimento para informações sobre nossos serviços.</p><div class="selo">FOB<br><b>QUALIDADE</b><br>DESDE 1978</div></aside>
+<main id="arquivo"><div class="caminho"><a href="#inicio">Início</a> &gt; Arquivo fotográfico</div><h1>CONSULTA AO ARQUIVO</h1><p>Consulte informações básicas sobre negativos e ordens de reprodução preservadas em nosso arquivo.</p><form id="consulta"><label for="codigo">Código do negativo:</label><div class="campos"><input id="codigo" name="codigo" type="text" autocomplete="off" maxlength="80" required><button type="submit">CONSULTAR</button></div></form><p id="mensagem" role="status" aria-live="polite"></p>
+<section id="resultado" hidden aria-label="Resultado da consulta"><h2>REGISTRO LOCALIZADO</h2><dl><dt>Código:</dt><dd id="codigo-localizado"></dd><dt>Data de processamento:</dt><dd>18/09/1994</dd><dt>Formato:</dt><dd>Negativo fotográfico — 35 mm</dd><dt>Conjunto:</dt><dd>07 exposições</dd></dl><h2>HISTÓRICO DE SERVIÇOS</h2><p class="historico">12/03/2008 — Reprodução fotográfica</p><dl><dt>Solicitante:</dt><dd><strong>Rafael Vesperini</strong></dd><dt>Quantidade:</dt><dd>03 cópias</dd></dl><h2>IMAGENS PRESERVADAS DO CONJUNTO</h2><p class="nota">Clique na imagem para ampliar.</p><div class="galeria">
+<!-- A ampliação usa o mesmo arquivo da miniatura. -->
+<figure><button type="button" class="miniatura"><img src="assets/img/01-sala-espelho.webp" alt="Imagem 01"></button><figcaption>Imagem 01</figcaption></figure>
+<figure><button type="button" class="miniatura"><img src="assets/img/02-homem-espelho.webp" alt="Imagem 02"></button><figcaption>Imagem 02</figcaption></figure>
+<figure><button type="button" class="miniatura"><img src="assets/img/03-familia.webp" alt="Imagem 03"></button><figcaption>Imagem 03</figcaption></figure>
+<figure><button type="button" class="miniatura"><img src="assets/img/04-outra-margem.webp" alt="Imagem 04"></button><figcaption>Imagem 04<br><span>A Outra Margem — 1994</span></figcaption></figure>
+</div></section><div class="informacao"><b>Informações ao cliente</b><p>A consulta apresenta os dados disponíveis no arquivo. Para serviços de reprodução, procure nosso atendimento.</p></div></main>
+<aside class="publicidade"><h2>PUBLICIDADE</h2><a class="banner cinema" id="cinearquivo" href="#cinearquivo-status"><small>O CINEMA NA SUA INTERNET</small><b>CINEARQUIVO</b><span>Tudo sobre cinema</span><span class="categorias">Críticas • Filmes • Elenco<br>Curiosidades</span><em>ACESSE O CATÁLOGO »</em></a><p id="cinearquivo-status" class="nota" role="status" aria-live="polite"></p><div class="banner digital"><small>FOTO ÓPTICA BRASIL</small><b>DO NEGATIVO<br>PARA O CD!</b><span>Digitalize suas fotografias</span><em>Consulte nosso balcão</em></div><div class="banner informatica"><small>PONTO DA INFORMÁTICA</small><b>CÂMERAS<br>&amp; ACESSÓRIOS</b><span>Mais memória.<br>Mais fotografias.</span><em>CONFIRA AS NOVIDADES</em></div><p class="anuncios">Espaço publicitário</p></aside>
+</div><footer id="contato"><a href="#inicio">Página inicial</a> | <a href="#arquivo">Consulta ao arquivo</a><p>© 2002–2009 Foto Óptica Brasil Ltda.<br>Última atualização: 14/08/2009</p></footer>
+</div>
+<dialog id="ampliacao" aria-label="Ampliação da fotografia"><div class="janela"><div class="barra"><span id="legenda-ampliada"></span><div class="controles"><button type="button" id="zoom-menos" aria-label="Diminuir zoom">−</button><button type="button" id="zoom-mais" aria-label="Aumentar zoom">+</button><button type="button" id="ajustar">AJUSTAR</button><button type="button" id="fechar">FECHAR</button></div></div><div id="area-foto"><img id="foto-ampliada" alt="" draggable="false"></div></div></dialog>
+</body></html>
+
+
