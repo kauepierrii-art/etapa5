@@ -1,7 +1,7 @@
 'use strict';
 // Endereço centralizado para a futura discussão arquivada.
 const BBS_URL = 'https://nocturnabbs.vercel.app';
-const INSTAGRAM_URL = '#instagram-status';
+const INSTAGRAM_URL = 'https://www.instagram.com/rafaelvesperini/';
 const films = [
   {title:'A Última Estação',year:2003,genre:'Drama',director:'Cláudia Amaral',poster:'ultima-estacao',note:'Despedidas numa pequena estação do interior.'},
   {title:'Depois da Chuva',year:2001,genre:'Drama / Romance',director:'Sérgio Valença',poster:'depois-chuva',note:'Uma família aprende a recomeçar.'},
