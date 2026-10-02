@@ -24,7 +24,7 @@ const topics = [
 {author:'RMEIRELES',date:'22/09/1994',text:'Vesper, acompanhei as mensagens sobre essa peça.\n\ntrabalho com acervo no Instituto Saldanha de Estudos Históricos.\n\nse ela for realmente antiga e você tiver alguma documentação, mesmo incompleta, podemos avaliar.\n\nse tiver interesse em vender ou doar, me manda uma descrição e algumas fotos.'},
 {author:'VESPER',date:'23/09/1994',text:'vender não.\n\nse vocês aceitarem como doação, melhor.'},
 {author:'RMEIRELES',date:'23/09/1994',text:'aceitamos avaliar dessa forma.\n\nte mando os dados no privado.'},
-{author:'VESPER',date:'30/09/1994',text:'resolvido.\n\nobrigado.'}]}
+{author:'VESPER',date:'30/09/1994',text:'resolvido, espelho doado.'}]}
 ];
 const general = [
 {id:'equipamentos',date:'12/10/1996',author:'NIX',subject:'Equipamentos antigos',category:'OUTROS ASSUNTOS',posts:[{author:'NIX',date:'12/10/1996',text:'Estou recuperando um monitor e dois teclados. Alguém ainda guarda os manuais desses equipamentos? Prefiro cópias em papel.'}]},
