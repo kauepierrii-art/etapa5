@@ -63,7 +63,7 @@ function go(next){historyStack.push(state);state=next;render();}
 function back(){state=historyStack.pop()||{screen:'menu'};render();}
 function addBack(){const previous=historyStack[historyStack.length-1];const button=el('button',state.screen==='topic'&&previous?.screen==='category'?'[ VOLTAR AO FÓRUM ]':'[ VOLTAR ]','back');button.type='button';button.addEventListener('click',back);content.append(button);}
 function list(entries,profile=false){const ul=el('ul',undefined,'message-list'+(profile?' topic-list':''));for(const topic of entries){const li=el('li');const button=el('button');button.type='button';button.dataset.topic=topic.id;button.append(el('span','['+topic.date+']'));if(profile)button.append(el('span',topic.category));button.append(el('span',topic.author));button.append(el('span',topic.subject,'subject'));button.addEventListener('click',()=>go({screen:'topic',id:topic.id}));li.append(button);ul.append(li);}content.append(ul);}
-function render(){content.replaceChildren();searchPanel.hidden=state.screen!=='search';
+function render(){content.replaceChildren();
 if(state.screen==='menu'){
   const menu=el('div',undefined,'main-menu');
   for(const [label,screen] of [
