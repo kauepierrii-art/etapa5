@@ -55,15 +55,36 @@ general.push(
 {id:'conectado',date:'31/12/1997',author:'ORPHEUS',subject:'Quem ainda está conectado?',category:'OUTROS ASSUNTOS',posts:[{author:'ORPHEUS',date:'31/12/1997',text:'Passei só para desejar um bom ano. Vou desligar antes que comecem a reclamar do telefone ocupado. Tem alguém aí?'},{author:'NOCTIS',date:'31/12/1997',text:'Ainda por aqui. Bom ano para todos!'},{author:'NIX',date:'01/01/1998',text:'Cheguei atrasado. Feliz ano novo.'}]}
 );
 const content=document.getElementById('content');
+const searchPanel=document.querySelector('.search-panel');
 const historyStack=[];
-let state={screen:'messages'};
+let state={screen:'menu'};
 function el(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
 function go(next){historyStack.push(state);state=next;render();}
-function back(){state=historyStack.pop()||{screen:'messages'};render();}
+function back(){state=historyStack.pop()||{screen:'menu'};render();}
 function addBack(){const previous=historyStack[historyStack.length-1];const button=el('button',state.screen==='topic'&&previous?.screen==='category'?'[ VOLTAR AO FÓRUM ]':'[ VOLTAR ]','back');button.type='button';button.addEventListener('click',back);content.append(button);}
 function list(entries,profile=false){const ul=el('ul',undefined,'message-list'+(profile?' topic-list':''));for(const topic of entries){const li=el('li');const button=el('button');button.type='button';button.dataset.topic=topic.id;button.append(el('span','['+topic.date+']'));if(profile)button.append(el('span',topic.category));button.append(el('span',topic.author));button.append(el('span',topic.subject,'subject'));button.addEventListener('click',()=>go({screen:'topic',id:topic.id}));li.append(button);ul.append(li);}content.append(ul);}
-function render(){content.replaceChildren();for(const button of document.querySelectorAll('nav button')){if(button.dataset.screen===state.screen)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
-if(state.screen==='messages'){content.append(el('h2','ÚLTIMAS MENSAGENS'),el('p','Bem-vindo ao arquivo. Mensagens preservadas de uma rede de conversas independente.','intro'));const head=el('div',undefined,'table-head');head.append(el('span','DATA'),el('span','APELIDO'),el('span','ASSUNTO'));content.append(head);list(general.slice(0,5));content.append(el('p','O acervo está disponível para consulta. Respostas e novos cadastros estão desabilitados.','notice'));}
+function render(){content.replaceChildren();searchPanel.hidden=state.screen!=='search';
+if(state.screen==='menu'){
+  const menu=el('div',undefined,'main-menu');
+  for(const [label,screen] of [
+    ['[1] MENSAGENS','messages'],
+    ['[2] FÓRUNS','forums'],
+    ['[3] ARQUIVOS','files'],
+    ['[4] USUÁRIOS','users'],
+    ['[5] BUSCA','search'],
+    ['[0] SAIR','exit']
+  ]){
+    const button=el('button',label);
+    button.type='button';
+    button.addEventListener('click',()=>{
+      go({screen});
+      if(screen==='search') document.getElementById('query').focus();
+    });
+    menu.append(button);
+  }
+  content.append(menu);
+}
+else if(state.screen==='messages'){content.append(el('h2','ÚLTIMAS MENSAGENS'),el('p','Bem-vindo ao arquivo. Mensagens preservadas de uma rede de conversas independente.','intro'));const head=el('div',undefined,'table-head');head.append(el('span','DATA'),el('span','APELIDO'),el('span','ASSUNTO'));content.append(head);list(general.slice(0,5));content.append(el('p','O acervo está disponível para consulta. Respostas e novos cadastros estão desabilitados.','notice'));}
 else if(state.screen==='results'){if(state.user){content.append(el('h2','USUÁRIO LOCALIZADO'));const dl=el('dl',undefined,'profile');for(const [label,value]of [['Apelido:','VESPER'],['Cadastro:','1993'],['Última atividade:','1994'],['Tópicos preservados:',String(topics.length)]])dl.append(el('dt',label),el('dd',value));content.append(dl,el('h2','RESULTADOS DO ARQUIVO'));list(topics,true);}else{content.append(el('h2','RESULTADO DA BUSCA'));if(state.ids.length)list([...general,...topics].filter(topic=>state.ids.includes(topic.id)));else content.append(el('p','Nenhum registro localizado.'));}addBack();}
 else if(state.screen==='topic'){const topic=[...topics,...general].find(item=>item.id===state.id);content.append(el('h2',topic.subject),el('p','FÓRUM: '+topic.category+' / SOMENTE LEITURA','intro'));for(const [index,post] of topic.posts.entries()){if(index===1)content.append(el('h2','RESPOSTAS'));const article=el('article',undefined,'post');const meta=el('div',undefined,'post-meta');meta.append(el('b','AUTOR: '+post.author),el('span','DATA: '+post.date));const body=el('div',undefined,'post-body');for(const paragraph of post.text.split('\n\n'))body.append(el('p',paragraph));article.append(meta,body);content.append(article);}addBack();}
 else if(state.screen==='forums'){content.append(el('h2','FÓRUNS'));const ul=el('ul',undefined,'directory');for(const category of ['CINEMA','HISTÓRIA','COLECIONISMO','RELATOS','DOCUMENTOS','OUTROS ASSUNTOS']){const li=el('li');const button=el('button','[ '+category+' ]');button.addEventListener('click',()=>go({screen:'category',category}));li.append(button);ul.append(li);}content.append(ul);addBack();}
@@ -71,11 +92,11 @@ else if(state.screen==='category'){content.append(el('h2',state.category));list(
 else if(state.screen==='files'){content.append(el('h2','ARQUIVOS DISPONÍVEIS'),el('p','Catálogo preservado. Transferência de arquivos desabilitada.','intro'));for(const [name,size]of [['LEIA-ME.TXT','2 KB'],['SALAS.GIF','38 KB'],['CATALOGO.ZIP','124 KB'],['BIBLIO.DOC','16 KB']]){const row=el('div',undefined,'file-row');row.append(el('b',name),el('span',size+' / ÍNDICE'));content.append(row);}addBack();}
 else if(state.screen==='users'){content.append(el('h2','USUÁRIOS / LISTAGEM PARCIAL'));const ul=el('ul',undefined,'user-list');for(const name of ['ANIMA','ARQUIVUM','CASSIEL','LUCERNA','MOTH','NIX','NOCTIS','ORPHEUS','RMEIRELES','SOLVE','VESPER'])ul.append(el('li',name));content.append(ul);addBack();}
 else if(state.screen==='search'){content.append(el('h2','CONSULTA AO ARQUIVO'),el('p','Use o campo acima para localizar um usuário, assunto ou palavra-chave.','intro'),el('p','Os registros de usuários são identificados pelo apelido.','notice'));addBack();}
-else if(state.screen==='exit'){content.append(el('h2','CONEXÃO ENCERRADA'),el('p','Obrigado pela visita. A base permanece disponível para consulta.'));const button=el('button','[ RECONECTAR ]','back');button.addEventListener('click',()=>go({screen:'messages'}));content.append(button);}
+else if(state.screen==='exit'){content.append(el('h2','CONEXÃO ENCERRADA'),el('p','Obrigado pela visita. A base permanece disponível para consulta.'));const button=el('button','[ RECONECTAR ]','back');button.addEventListener('click',()=>go({screen:'menu'}));content.append(button);}
 content.focus({preventScroll:true});}
 function normalize(value){return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/\s+/g,' ');}
 document.getElementById('search-form').addEventListener('submit',event=>{event.preventDefault();const query=normalize(document.getElementById('query').value);const alias=query.replace(/^sr\.?\s+/,'');if(alias==='vesper'){go({screen:'results',user:true});return;}const ids=query?[...general,...topics].filter(topic=>normalize(topic.author+' '+topic.subject+' '+topic.posts.map(post=>post.author+' '+post.text).join(' ')).includes(query)).map(topic=>topic.id):[];go({screen:'results',user:false,ids});});
-for(const button of document.querySelectorAll('nav button'))button.addEventListener('click',()=>{go({screen:button.dataset.screen});if(button.dataset.screen==='search')document.getElementById('query').focus();});
+
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();back();}});
 render();
 
